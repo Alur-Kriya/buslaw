@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { firmContact } from '../data/navigation';
+import Analytics from '@vercel/analytics/astro'
 
 interface Props {
   title?: string;
@@ -69,6 +70,7 @@ const siteUrl = 'https://buslaw.id';
       "priceRange": "$$$$",
       "openingHours": "Mo-Fr 08:30-18:00"
     })} />
+    <Analytics/>
   </head>
   <body class="min-h-screen flex flex-col bg-[#FAF8F5] text-slate-800 antialiased selection:bg-[#C8A961] selection:text-[#0F1E36]">
     <slot />
