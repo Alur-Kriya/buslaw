@@ -1,0 +1,64 @@
+---
+import { firmStats } from '../../data/stats';
+---
+
+<section class="relative -mt-10 z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+    {firmStats.map((stat) => (
+      <div
+        class="flex flex-col bg-white border border-slate-200/90 shadow-sm rounded-xl p-5 md:p-6 hover:shadow-md hover:border-[#C8A961]/60 transition-all duration-200 border-t-3 border-t-[#C8A961] group"
+        data-animate
+      >
+        <div class="flex items-baseline gap-x-1">
+          <span
+            class="text-3xl sm:text-4xl font-extrabold text-[#0F1E36] font-serif group-hover:text-[#C8A961] transition-colors count-up-target"
+            data-target={stat.value}
+          >
+            {stat.value}
+          </span>
+          <span class="text-2xl font-bold text-[#C8A961]">
+            {stat.suffix}
+          </span>
+        </div>
+
+        <h3 class="text-sm sm:text-base font-bold text-[#0F1E36] mt-2 font-sans">
+          {stat.label}
+        </h3>
+
+        <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+          {stat.description}
+        </p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<script>
+  const animateCounters = () => {
+    const targets = document.querySelectorAll('.count-up-target');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const el = entry.target as HTMLElement;
+          const targetValue = parseInt(el.getAttribute('data-target') || '0', 10);
+          let current = 0;
+          const increment = Math.ceil(targetValue / 40);
+          const timer = setInterval(() => {
+            current += increment;
+            if (current >= targetValue) {
+              el.innerText = targetValue.toString();
+              clearInterval(timer);
+            } else {
+              el.innerText = current.toString();
+            }
+          }, 30);
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    targets.forEach((target) => observer.observe(target));
+  };
+
+  document.addEventListener('DOMContentLoaded', animateCounters);
+</script>

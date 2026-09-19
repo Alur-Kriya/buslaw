@@ -1,0 +1,27 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import Button from '../components/common/Button.astro';
+---
+
+<PageLayout
+  title="Halaman Tidak Ditemukan | BUSLAW & PARTNERS"
+  description="Halaman yang Anda tuju tidak ditemukan atau telah dipindahkan."
+>
+  <section class="min-h-[60vh] flex items-center justify-center py-24 bg-[#FAF8F5]">
+    <div class="max-w-md mx-auto px-4 text-center space-y-6">
+      <div class="text-7xl font-extrabold text-[#0F1E36] font-serif">404</div>
+      <h1 class="text-2xl sm:text-3xl font-bold text-[#0F1E36] font-serif">
+        Halaman Tidak Ditemukan
+      </h1>
+      <p class="text-sm text-slate-600 leading-relaxed">
+        Mohon maaf, halaman yang Anda cari tidak tersedia, sedang dalam pembaruan berkas, atau tautan telah dialihkan.
+      </p>
+      <div class="pt-2">
+        <Button href="/" variant="primary" size="md">
+          <span>Kembali ke Beranda</span>
+        </Button>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+

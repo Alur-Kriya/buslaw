@@ -1,0 +1,50 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'secondary' | 'outline' | 'soft' | 'dark';
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
+  type?: 'button' | 'submit' | 'reset';
+  target?: string;
+  rel?: string;
+}
+
+const {
+  href,
+  variant = 'primary',
+  size = 'md',
+  class: className = '',
+  type = 'button',
+  target,
+  rel,
+} = Astro.props;
+
+// Standard Preline UI Button Base
+const baseStyles = 'inline-flex items-center justify-center font-medium rounded-lg border transition-all duration-200 focus:outline-hidden disabled:opacity-50 disabled:pointer-events-none cursor-pointer';
+
+const variants = {
+  primary: 'bg-[#C8A961] text-[#0F1E36] hover:bg-[#D8BD7E] border-transparent shadow-xs hover:shadow-md hover:shadow-[#C8A961]/25 focus:ring-2 focus:ring-[#C8A961] active:scale-[0.99]',
+  secondary: 'bg-[#0F1E36] text-white hover:bg-[#1E3760] border-transparent shadow-xs hover:shadow-md focus:ring-2 focus:ring-[#0F1E36] active:scale-[0.99]',
+  outline: 'border-[#C8A961] text-[#C8A961] hover:bg-[#C8A961] hover:text-[#0F1E36] focus:ring-2 focus:ring-[#C8A961]',
+  soft: 'bg-[#C8A961]/15 text-[#B19047] hover:bg-[#C8A961]/25 border-transparent focus:ring-2 focus:ring-[#C8A961]',
+  dark: 'bg-[#0A1220] text-white hover:bg-[#162847] border-slate-700/60 shadow-xs focus:ring-2 focus:ring-slate-500'
+};
+
+const sizes = {
+  sm: 'py-2 px-3 text-xs gap-x-1.5',
+  md: 'py-2.5 px-4 text-sm gap-x-2',
+  lg: 'py-3.5 px-6 text-base gap-x-2.5'
+};
+
+const combinedClasses = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`;
+---
+
+{href ? (
+  <a href={href} class={combinedClasses} target={target} rel={rel}>
+    <slot />
+  </a>
+) : (
+  <button type={type} class={combinedClasses}>
+    <slot />
+  </button>
+)}

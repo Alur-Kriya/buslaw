@@ -1,0 +1,36 @@
+---
+interface Props {
+  badge?: string;
+  title: string;
+  subtitle?: string;
+  centered?: boolean;
+  light?: boolean;
+}
+
+const {
+  badge,
+  title,
+  subtitle,
+  centered = false,
+  light = false,
+} = Astro.props;
+---
+
+<div class={`space-y-3 mb-12 ${centered ? 'text-center max-w-3xl mx-auto' : 'max-w-2xl'}`} data-animate>
+  {badge && (
+    <span class="inline-flex items-center gap-x-1.5 py-1 px-3.5 rounded-full text-xs font-medium bg-[#C8A961]/15 text-[#B19047] border border-[#C8A961]/30">
+      <span class="size-1.5 inline-block rounded-full bg-[#C8A961]"></span>
+      <span>{badge}</span>
+    </span>
+  )}
+
+  <h2 class={`text-3xl sm:text-4xl lg:text-4xl font-bold tracking-tight font-serif ${light ? 'text-white' : 'text-[#0F1E36]'}`}>
+    {title}
+  </h2>
+
+  {subtitle && (
+    <p class={`text-base sm:text-lg leading-relaxed ${light ? 'text-slate-300' : 'text-slate-600'}`}>
+      {subtitle}
+    </p>
+  )}
+</div>

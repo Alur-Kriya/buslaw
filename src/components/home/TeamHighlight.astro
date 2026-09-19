@@ -1,0 +1,111 @@
+---
+import SectionTitle from '../common/SectionTitle.astro';
+import Button from '../common/Button.astro';
+import { lawyers } from '../../data/team';
+---
+
+<section class="py-24 bg-white relative overflow-hidden" id="tim">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+      <SectionTitle
+        badge="Dewan Advokat & Konsultan Hukum"
+        title="Didukung oleh 6 Pengacara Berpengalaman"
+        subtitle="Struktur kepemimpinan firma kami terdiri dari jajaran partner senior hingga associate berbakat dengan penguasaan spesifik pada tiap cabang hukum."
+      />
+      <div class="hidden md:block shrink-0 mb-12">
+        <Button href="/tim" variant="outline" size="md">
+          <span>Lihat Profil Lengkap</span>
+          <svg class="size-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
+        </Button>
+      </div>
+    </div>
+
+    <!-- Preline UI 6 Lawyers Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {lawyers.map((lawyer, index) => (
+        <div
+          class="flex flex-col bg-white border border-slate-200 shadow-xs rounded-xl overflow-hidden hover:border-[#C8A961]/70 hover:shadow-md transition-all duration-200 group"
+          data-animate
+        >
+          <!-- Portrait with Preline overlay style -->
+          <div class="relative h-72 sm:h-80 overflow-hidden bg-slate-900">
+            <img
+              src={lawyer.image}
+              alt={lawyer.name}
+              class="w-full h-full object-cover object-top filter brightness-95 group-hover:scale-105 transition-transform duration-500"
+              loading={index < 3 ? 'eager' : 'lazy'}
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0A1220] via-[#0A1220]/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
+
+            <!-- Role Badge Overlay -->
+            <div class="absolute top-4 left-4">
+              <span class={`inline-flex items-center gap-x-1.5 py-1 px-3 rounded-full text-xs font-semibold uppercase shadow-xs ${
+                lawyer.roleLevel === 'partner'
+                  ? 'bg-[#C8A961] text-[#0F1E36]'
+                  : 'bg-[#0F1E36] text-[#C8A961] border border-[#C8A961]/40'
+              }`}>
+                {lawyer.title}
+              </span>
+            </div>
+
+            <!-- Experience pill -->
+            <div class="absolute bottom-4 right-4 inline-flex items-center gap-x-1.5 py-1 px-2.5 rounded-md text-[11px] font-medium bg-[#0A1220]/80 text-white backdrop-blur-xs border border-slate-700/60">
+              <span class="size-1.5 rounded-full bg-emerald-400"></span>
+              <span>{lawyer.experienceYears} Thn Pengalaman</span>
+            </div>
+          </div>
+
+          <!-- Card Body -->
+          <div class="p-6 flex flex-col justify-between flex-grow">
+            <div>
+              <h3 class="text-xl font-bold text-[#0F1E36] group-hover:text-[#C8A961] transition-colors font-serif">
+                <a href={`/tim/${lawyer.id}`}>
+                  {lawyer.name}
+                </a>
+              </h3>
+
+              <div class="text-xs font-semibold uppercase tracking-wider text-[#B19047] mt-1 mb-4 font-sans">
+                {lawyer.title}
+              </div>
+
+              <div class="space-y-2 mb-6">
+                <p class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Spesialisasi:</p>
+                <div class="flex flex-wrap gap-1.5">
+                  {lawyer.specialties.map((spec) => (
+                    <span class="inline-flex items-center py-0.5 px-2 rounded-md bg-slate-100 text-[11px] text-slate-700 border border-slate-200">
+                      {spec}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <!-- Card Bottom Action -->
+            <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
+              <span class="text-slate-500 font-medium">
+                {lawyer.casesHandled}+ Perkara Selesai
+              </span>
+
+              <a
+                href={`/tim/${lawyer.id}`}
+                class="inline-flex items-center gap-x-1 font-bold text-[#0F1E36] group-hover:text-[#C8A961] transition-colors uppercase tracking-wider"
+              >
+                <span>Lihat Profil</span>
+                <span class="transform group-hover:translate-x-0.5 transition-transform">→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Mobile Button -->
+    <div class="mt-8 text-center md:hidden">
+      <Button href="/tim" variant="primary" size="md" class="w-full">
+        <span>Lihat Semua 6 Profil Pengacara</span>
+      </Button>
+    </div>
+  </div>
+</section>

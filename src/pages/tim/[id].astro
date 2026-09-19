@@ -1,0 +1,176 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import Button from '../../components/common/Button.astro';
+import { lawyers, type Lawyer } from '../../data/team';
+import { firmContact } from '../../data/navigation';
+
+export function getStaticPaths() {
+  return lawyers.map((lawyer) => ({
+    params: { id: lawyer.id },
+    props: { lawyer },
+  }));
+}
+
+interface Props {
+  lawyer: Lawyer;
+}
+
+const { lawyer } = Astro.props;
+---
+
+<PageLayout
+  title={`${lawyer.name} | ${lawyer.title} - BUSLAW & PARTNERS`}
+  description={`Profil lengkap ${lawyer.name}, ${lawyer.title} di Buslaw & Partners. Spesialisasi: ${lawyer.specialties.join(', ')}.`}
+  headerTitle={lawyer.name}
+  headerSubtitle={`${lawyer.title} — ${lawyer.specialties.join(' • ')}`}
+  breadcrumbs={[
+    { label: 'Tim Pengacara', href: '/tim' },
+    { label: lawyer.name.split(',')[0] }
+  ]}
+>
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
+        <!-- Left: Sticky Preline Lawyer Profile Card & Contacts (4 cols) -->
+        <div class="lg:col-span-4 space-y-6">
+          <div class="sticky top-28 space-y-6">
+            <!-- Preline Portrait Card -->
+            <div class="flex flex-col bg-white border border-slate-200 shadow-sm rounded-2xl overflow-hidden">
+              <div class="relative bg-slate-900">
+                <img
+                  src={lawyer.image}
+                  alt={lawyer.name}
+                  class="w-full h-96 object-cover object-top"
+                />
+              </div>
+              <div class="p-5 bg-[#0F1E36] text-white">
+                <span class="inline-flex items-center gap-x-1.5 py-1 px-3 rounded-full text-xs font-semibold uppercase bg-[#C8A961] text-[#0F1E36] shadow-xs mb-2">
+                  {lawyer.title}
+                </span>
+                <h3 class="text-xl font-bold font-serif">{lawyer.name}</h3>
+                <p class="text-xs text-slate-300 mt-1">{lawyer.experienceYears}+ Tahun Pengalaman Praktik Hukum</p>
+              </div>
+            </div>
+
+            <!-- Quick Contacts Card -->
+            <div class="flex flex-col bg-[#FAF8F5] border border-slate-200 shadow-xs rounded-2xl p-6 space-y-4">
+              <h4 class="text-xs font-bold uppercase tracking-wider text-[#0F1E36]">
+                Kontak & Informasi Perkara
+              </h4>
+              <div class="space-y-3 text-xs text-slate-600">
+                <div class="flex items-center justify-between border-b border-slate-200/80 pb-2">
+                  <span class="font-medium text-slate-500">Email:</span>
+                  <a href={`mailto:${lawyer.email}`} class="font-semibold text-[#0F1E36] hover:text-[#C8A961]">{lawyer.email}</a>
+                </div>
+                <div class="flex items-center justify-between border-b border-slate-200/80 pb-2">
+                  <span class="font-medium text-slate-500">Telepon Kantor:</span>
+                  <a href={`tel:${lawyer.phone}`} class="font-semibold text-[#0F1E36] hover:text-[#C8A961]">{lawyer.phone}</a>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="font-medium text-slate-500">Perkara Ditangani:</span>
+                  <span class="font-bold text-[#C8A961]">{lawyer.casesHandled}+ Kasus</span>
+                </div>
+              </div>
+
+              <div class="pt-2">
+                <a
+                  href={`https://wa.me/${firmContact.whatsapp}?text=${encodeURIComponent(`Halo, saya ingin menjadwalkan konsultasi kasus dengan ${lawyer.name}.`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="w-full py-2.5 px-4 inline-flex justify-center items-center gap-x-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition-colors shadow-xs"
+                >
+                  <span>Jadwalkan Konsultasi</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Full Bio & Career Details (8 cols) -->
+        <div class="lg:col-span-8 space-y-10">
+          <!-- Preline Blockquote Callout -->
+          <div class="p-6 rounded-2xl bg-[#0F1E36] text-white border-l-4 border-[#C8A961] shadow-md">
+            <blockquote class="text-base sm:text-lg italic font-serif leading-relaxed text-slate-200">
+              "{lawyer.quote}"
+            </blockquote>
+          </div>
+
+          <!-- Biography -->
+          <div class="space-y-4">
+            <h3 class="text-2xl font-bold text-[#0F1E36] font-serif border-b border-slate-200 pb-3">
+              Biografi & Rekam Jejak
+            </h3>
+            <p class="text-slate-600 leading-relaxed text-base">
+              {lawyer.bio}
+            </p>
+          </div>
+
+          <!-- Specialties (Preline Pills) -->
+          <div class="space-y-4">
+            <h3 class="text-2xl font-bold text-[#0F1E36] font-serif border-b border-slate-200 pb-3">
+              Fokus Spesialisasi Hukum
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {lawyer.specialties.map((spec) => (
+                <div class="p-3.5 rounded-xl bg-[#FAF8F5] border border-slate-200 flex items-center gap-x-3">
+                  <span class="size-2 rounded-full bg-[#C8A961]"></span>
+                  <span class="text-sm font-semibold text-[#0F1E36]">{spec}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Education Chronology -->
+          <div class="space-y-4">
+            <h3 class="text-2xl font-bold text-[#0F1E36] font-serif border-b border-slate-200 pb-3">
+              Riwayat Pendidikan
+            </h3>
+            <div class="space-y-3">
+              {lawyer.education.map((edu) => (
+                <div class="flex items-start gap-x-3 p-4 rounded-xl border border-slate-200 bg-white shadow-2xs">
+                  <svg class="size-5 text-[#C8A961] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                  </svg>
+                  <span class="text-sm text-slate-700 font-medium">{edu}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Preline Badges for Memberships -->
+          <div class="space-y-4">
+            <h3 class="text-2xl font-bold text-[#0F1E36] font-serif border-b border-slate-200 pb-3">
+              Lisensi & Keanggotaan Profesi
+            </h3>
+            <div class="flex flex-wrap gap-2">
+              {lawyer.memberships.map((m) => (
+                <span class="inline-flex items-center gap-x-1.5 py-1.5 px-3.5 rounded-lg bg-[#FAF8F5] border border-slate-200 text-xs font-semibold text-[#0F1E36]">
+                  <span class="size-1.5 rounded-full bg-[#C8A961]"></span>
+                  {m}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <!-- Notable Achievements -->
+          <div class="space-y-4">
+            <h3 class="text-2xl font-bold text-[#0F1E36] font-serif border-b border-slate-200 pb-3">
+              Prestasi & Penanganan Kasus Terpilih
+            </h3>
+            <ul class="space-y-3">
+              {lawyer.achievements.map((ach) => (
+                <li class="flex items-start gap-x-3 text-sm text-slate-700">
+                  <svg class="size-5 text-[#C8A961] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>{ach}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>

@@ -1,0 +1,103 @@
+---
+import Button from '../common/Button.astro';
+---
+
+<section class="py-24 bg-[#0F1E36] text-white relative overflow-hidden">
+  <!-- Subtle Background Accents -->
+  <div class="absolute -bottom-32 -left-32 size-96 bg-[#C8A961]/10 rounded-full blur-3xl pointer-events-none"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
+      <!-- Left: Visual Image Collage with Founder Message -->
+      <div class="lg:col-span-6 relative" data-animate>
+        <div class="relative mx-auto max-w-md lg:max-w-none">
+          <div class="rounded-2xl overflow-hidden border border-[#C8A961]/30 shadow-2xl bg-[#0A1220]">
+            <img
+              src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1000"
+              alt="Buslaw Law Firm Conference Room"
+              class="w-full h-[420px] object-cover filter brightness-90 hover:scale-105 transition-transform duration-700"
+            />
+          </div>
+
+          <!-- Preline Overlay Card -->
+          <div class="absolute -bottom-6 -right-4 sm:right-6 bg-[#0A1220]/95 backdrop-blur-md border border-[#C8A961]/40 rounded-xl p-5 shadow-2xl max-w-xs">
+            <div class="text-[#C8A961] text-3xl font-serif leading-none mb-1.5">“</div>
+            <p class="text-xs text-slate-300 italic mb-3 leading-relaxed">
+              Kami tidak sekadar beracara, namun merancang kepastian hukum yang mengamankan masa depan bisnis Anda.
+            </p>
+            <p class="text-xs font-bold text-white font-serif">Dr. Bambang Sudirman, S.H., M.H.</p>
+            <p class="text-[10px] text-[#C8A961] uppercase tracking-wider font-semibold">Managing Partner Buslaw</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Narrative & 4 Value Pillars -->
+      <div class="lg:col-span-6 space-y-6" data-animate>
+        <span class="inline-flex items-center gap-x-1.5 py-1 px-3.5 rounded-full text-xs font-medium bg-[#C8A961]/15 text-[#D8BD7E] border border-[#C8A961]/30">
+          <span class="size-1.5 inline-block rounded-full bg-[#C8A961]"></span>
+          <span>Tentang Buslaw & Partners</span>
+        </span>
+
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white leading-tight font-serif">
+          Menjaga Nilai Keadilan dengan Standar Profesionalisme Tertinggi
+        </h2>
+
+        <p class="text-base text-slate-300 leading-relaxed font-normal">
+          Didirikan di Jakarta, Buslaw & Partners tumbuh menjadi kantor hukum pilihan bagi korporasi nasional, entitas multinasional, serta individu terkemuka. Kami percaya bahwa penanganan perkara yang efektif lahir dari pemahaman hukum yang mendalam, dedikasi penuh, dan integritas tanpa kompromi.
+        </p>
+
+        <!-- 4 Preline Feature Pillars -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
+          <div class="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-[#C8A961]/40 transition-colors">
+            <div class="text-[#C8A961] font-bold text-xs sm:text-sm mb-1 flex items-center gap-x-2">
+              <span class="size-1.5 rounded-full bg-[#C8A961]"></span>
+              <span>Integritas Tanpa Kompromi</span>
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Menjunjung tinggi kode etik advokat dan kepatuhan hukum yang transparan bagi setiap klien.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-[#C8A961]/40 transition-colors">
+            <div class="text-[#C8A961] font-bold text-xs sm:text-sm mb-1 flex items-center gap-x-2">
+              <span class="size-1.5 rounded-full bg-[#C8A961]"></span>
+              <span>Ketelitian Analitis Presisi</span>
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Setiap klausul dan bukti diuji secara berlapis oleh tim partner dan associate lintas disiplin.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-[#C8A961]/40 transition-colors">
+            <div class="text-[#C8A961] font-bold text-xs sm:text-sm mb-1 flex items-center gap-x-2">
+              <span class="size-1.5 rounded-full bg-[#C8A961]"></span>
+              <span>Kerahasiaan Tingkat Tinggi</span>
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Protokol perlindungan data dan privasi kasus berstandar korporasi internasional.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-[#C8A961]/40 transition-colors">
+            <div class="text-[#C8A961] font-bold text-xs sm:text-sm mb-1 flex items-center gap-x-2">
+              <span class="size-1.5 rounded-full bg-[#C8A961]"></span>
+              <span>Pendekatan Solutif Terukur</span>
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Mengutamakan efisiensi waktu dan biaya melalui negosiasi maupun litigasi tegas terukur.
+            </p>
+          </div>
+        </div>
+
+        <div class="pt-3">
+          <Button href="/tentang-kami" variant="primary" size="md">
+            <span>Pelajari Profil Lengkap Kami</span>
+            <svg class="size-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+            </svg>
+          </Button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

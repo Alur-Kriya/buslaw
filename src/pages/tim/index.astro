@@ -1,0 +1,176 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import SectionTitle from '../../components/common/SectionTitle.astro';
+import { lawyers } from '../../data/team';
+
+const partners = lawyers.filter((l) => l.roleLevel === 'partner');
+const associates = lawyers.filter((l) => l.roleLevel === 'associate');
+---
+
+<PageLayout
+  title="Tim Pengacara & Dewan Advokat | BUSLAW & PARTNERS"
+  description="Profil 6 pengacara berdedikasi tinggi di Buslaw & Partners: Managing Partner, Senior Partner, Partner, Senior Associate, Associate, dan Junior Associate."
+  headerTitle="Dewan Advokat & Konsultan Hukum"
+  headerSubtitle="Dipimpin oleh 6 praktisi hukum bereputasi yang memadukan keahlian litigasi agresif, analisis transaksi korporasi tajam, serta etika integritas tertinggi."
+  breadcrumbs={[{ label: 'Tim Pengacara' }]}
+>
+  <section class="py-20 bg-[#FAF8F5]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+      <!-- Section: Partners -->
+      <div>
+        <div class="border-b border-slate-200 pb-4 mb-8">
+          <span class="inline-flex items-center gap-x-1.5 py-1 px-3 rounded-full text-xs font-semibold uppercase tracking-wider bg-[#C8A961]/15 text-[#B19047] border border-[#C8A961]/30 mb-2">
+            <span class="size-1.5 rounded-full bg-[#C8A961]"></span>
+            <span>Dewan Pimpinan Firma</span>
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-[#0F1E36] font-serif">
+            Jajaran Partners
+          </h2>
+          <p class="text-sm text-slate-500 mt-1">
+            Penentu arah strategis firma dan pimpinan litigasi perkara bernilai tinggi.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {partners.map((lawyer) => (
+            <div class="flex flex-col bg-white border border-slate-200 shadow-xs rounded-xl overflow-hidden hover:border-[#C8A961]/70 hover:shadow-md transition-all duration-200 group">
+              <!-- Portrait -->
+              <div class="relative h-80 overflow-hidden bg-slate-900">
+                <img
+                  src={lawyer.image}
+                  alt={lawyer.name}
+                  class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0A1220] via-transparent to-transparent"></div>
+                <div class="absolute top-4 left-4">
+                  <span class="inline-flex items-center gap-x-1.5 py-1 px-3 rounded-full text-xs font-semibold uppercase bg-[#C8A961] text-[#0F1E36] shadow-xs">
+                    {lawyer.title}
+                  </span>
+                </div>
+                <div class="absolute bottom-4 right-4 inline-flex items-center gap-x-1.5 py-1 px-2.5 rounded-md text-[11px] font-medium bg-[#0A1220]/80 text-white backdrop-blur-xs border border-slate-700/60">
+                  <span class="size-1.5 rounded-full bg-emerald-400"></span>
+                  <span>{lawyer.experienceYears}+ Thn Pengalaman</span>
+                </div>
+              </div>
+
+              <!-- Body -->
+              <div class="p-6 flex flex-col justify-between flex-grow">
+                <div>
+                  <h3 class="text-xl font-bold text-[#0F1E36] group-hover:text-[#C8A961] transition-colors font-serif mb-1">
+                    <a href={`/tim/${lawyer.id}`}>
+                      {lawyer.name}
+                    </a>
+                  </h3>
+                  <p class="text-xs font-semibold text-[#B19047] uppercase tracking-wider mb-4">
+                    {lawyer.title}
+                  </p>
+
+                  <p class="text-xs text-slate-600 line-clamp-3 leading-relaxed mb-4">
+                    {lawyer.bio}
+                  </p>
+
+                  <div class="space-y-1.5 mb-6">
+                    <p class="text-[11px] uppercase font-bold text-slate-400">Bidang Keahlian:</p>
+                    <div class="flex flex-wrap gap-1">
+                      {lawyer.specialties.map((spec) => (
+                        <span class="inline-flex items-center py-0.5 px-2 rounded-md bg-slate-100 text-[10px] text-slate-700 border border-slate-200">
+                          {spec}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
+                  <span class="text-slate-500">{lawyer.casesHandled}+ Kasus Selesai</span>
+                  <a href={`/tim/${lawyer.id}`} class="inline-flex items-center gap-x-1 font-bold text-[#0F1E36] group-hover:text-[#C8A961] transition-colors">
+                    <span>Detail Profil</span>
+                    <span class="transform group-hover:translate-x-0.5 transition-transform">→</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Section: Associates -->
+      <div>
+        <div class="border-b border-slate-200 pb-4 mb-8">
+          <span class="inline-flex items-center gap-x-1.5 py-1 px-3 rounded-full text-xs font-semibold uppercase tracking-wider bg-slate-100 text-slate-700 border border-slate-300 mb-2">
+            <span class="size-1.5 rounded-full bg-slate-500"></span>
+            <span>Tim Litigasi & Konsultan</span>
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-[#0F1E36] font-serif">
+            Jajaran Associates
+          </h2>
+          <p class="text-sm text-slate-500 mt-1">
+            Advokat muda dinamis dengan penguasaan riset mendalam dan pendampingan perkara komprehensif.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {associates.map((lawyer) => (
+            <div class="flex flex-col bg-white border border-slate-200 shadow-xs rounded-xl overflow-hidden hover:border-[#C8A961]/70 hover:shadow-md transition-all duration-200 group">
+              <!-- Portrait -->
+              <div class="relative h-80 overflow-hidden bg-slate-900">
+                <img
+                  src={lawyer.image}
+                  alt={lawyer.name}
+                  class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0A1220] via-transparent to-transparent"></div>
+                <div class="absolute top-4 left-4">
+                  <span class="inline-flex items-center gap-x-1.5 py-1 px-3 rounded-full text-xs font-semibold uppercase bg-[#0F1E36] text-[#C8A961] border border-[#C8A961]/40 shadow-xs">
+                    {lawyer.title}
+                  </span>
+                </div>
+                <div class="absolute bottom-4 right-4 inline-flex items-center gap-x-1.5 py-1 px-2.5 rounded-md text-[11px] font-medium bg-[#0A1220]/80 text-white backdrop-blur-xs border border-slate-700/60">
+                  <span class="size-1.5 rounded-full bg-emerald-400"></span>
+                  <span>{lawyer.experienceYears}+ Thn Pengalaman</span>
+                </div>
+              </div>
+
+              <!-- Body -->
+              <div class="p-6 flex flex-col justify-between flex-grow">
+                <div>
+                  <h3 class="text-xl font-bold text-[#0F1E36] group-hover:text-[#C8A961] transition-colors font-serif mb-1">
+                    <a href={`/tim/${lawyer.id}`}>
+                      {lawyer.name}
+                    </a>
+                  </h3>
+                  <p class="text-xs font-semibold text-[#B19047] uppercase tracking-wider mb-4">
+                    {lawyer.title}
+                  </p>
+
+                  <p class="text-xs text-slate-600 line-clamp-3 leading-relaxed mb-4">
+                    {lawyer.bio}
+                  </p>
+
+                  <div class="space-y-1.5 mb-6">
+                    <p class="text-[11px] uppercase font-bold text-slate-400">Bidang Keahlian:</p>
+                    <div class="flex flex-wrap gap-1">
+                      {lawyer.specialties.map((spec) => (
+                        <span class="inline-flex items-center py-0.5 px-2 rounded-md bg-slate-100 text-[10px] text-slate-700 border border-slate-200">
+                          {spec}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
+                  <span class="text-slate-500">{lawyer.casesHandled}+ Kasus Selesai</span>
+                  <a href={`/tim/${lawyer.id}`} class="inline-flex items-center gap-x-1 font-bold text-[#0F1E36] group-hover:text-[#C8A961] transition-colors">
+                    <span>Detail Profil</span>
+                    <span class="transform group-hover:translate-x-0.5 transition-transform">→</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>

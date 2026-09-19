@@ -1,0 +1,145 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import SectionTitle from '../components/common/SectionTitle.astro';
+import Button from '../components/common/Button.astro';
+---
+
+<PageLayout
+  title="Tentang Kami | BUSLAW & PARTNERS Advocates & Legal Counsel"
+  description="Mengenal sejarah, filosofi, visi misi, serta rekam jejak Buslaw & Partners dalam mendampingi klien korporasi dan perseorangan sejak 2008."
+  headerTitle="Tentang Buslaw & Partners"
+  headerSubtitle="Membangun reputasi hukum berbasis integritas, kedalaman analisis yuridis, dan komitmen tanpa batas terhadap kepentingan terbaik klien."
+  breadcrumbs={[{ label: 'Tentang Kami' }]}
+>
+  <!-- Sejarah & Filosofi -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        <div class="lg:col-span-6 space-y-6" data-animate>
+          <span class="inline-flex items-center gap-x-1.5 py-1 px-3 rounded-full text-xs font-medium bg-[#C8A961]/15 text-[#B19047] border border-[#C8A961]/30">
+            <span class="size-1.5 rounded-full bg-[#C8A961]"></span>
+            <span>Sejarah & Perjalanan</span>
+          </span>
+
+          <h2 class="text-3xl sm:text-4xl font-bold text-[#0F1E36] font-serif">
+            Didirikan Sejak 2008 di Jantung Finansial Jakarta
+          </h2>
+
+          <p class="text-slate-600 leading-relaxed text-base">
+            Buslaw & Partners berawal dari visi <strong>Dr. Bambang Sudirman, S.H., M.H.</strong> untuk mendirikan sebuah boutique law firm yang tidak hanya piawai dalam manuver hukum litigasi di pengadilan, tetapi juga mampu menjadi mitra strategis bisnis yang proaktif dalam pencegahan sengketa (preventive law).
+          </p>
+
+          <p class="text-slate-600 leading-relaxed text-base">
+            Dalam rentang waktu lebih dari 18 tahun, kami berkembang menjadi firma hukum berkekuatan 6 advokat lintas generasi yang memadukan kebijaksanaan partner senior dengan ketangkasan riset teknologi hukum para associate muda. Kami telah mewakili ratusan entitas korporasi dari industri energi, manufaktur, perbankan, hingga properti dan teknologi.
+          </p>
+
+          <div class="pt-2">
+            <Button href="/tim" variant="primary" size="md">
+              <span>Kenali Tim Advokat Kami</span>
+            </Button>
+          </div>
+        </div>
+
+        <div class="lg:col-span-6" data-animate>
+          <div class="relative rounded-2xl overflow-hidden shadow-xl border border-slate-200 bg-slate-900">
+            <img
+              src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&q=80&w=1000"
+              alt="Buslaw Team Discussion"
+              class="w-full h-[450px] object-cover"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0A1220]/80 via-transparent to-transparent"></div>
+            <div class="absolute bottom-6 left-6 right-6 text-white">
+              <span class="inline-flex items-center gap-x-1 py-0.5 px-2 rounded text-[11px] font-semibold tracking-wider uppercase bg-[#C8A961]/20 text-[#D8BD7E]">
+                Komitmen Kolektif
+              </span>
+              <p class="text-lg font-bold font-serif mt-2">
+                "Kekuatan sebuah firma hukum diukur dari keteguhan memegang kebenaran materiil dan kepercayaan klien."
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Visi & Misi (Preline UI Cards) -->
+  <section class="py-20 bg-[#FAF8F5] border-y border-slate-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <SectionTitle
+        badge="Landasan Gerak"
+        title="Visi & Misi Firma"
+        subtitle="Prinsip dasar yang mengarahkan setiap opini hukum, persidangan, dan perundingan yang kami pimpin."
+        centered={true}
+      />
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+        <!-- Visi -->
+        <div class="flex flex-col bg-white border border-slate-200 shadow-xs rounded-xl p-6 sm:p-10 hover:border-[#C8A961]/60 transition-all">
+          <div class="size-12 rounded-xl bg-[#0F1E36] text-[#C8A961] inline-flex items-center justify-center font-serif text-xl font-bold mb-6">
+            V
+          </div>
+          <h3 class="text-2xl font-bold text-[#0F1E36] font-serif mb-3">Visi Kami</h3>
+          <p class="text-slate-600 leading-relaxed text-base">
+            Menjadi firma hukum terdepan di Indonesia yang diakui secara regional atas keunggulan analisis hukum komersial, ketangguhan advokasi litigasi, serta kepeloporan standar etika profesionalisme tanpa kompromi.
+          </p>
+        </div>
+
+        <!-- Misi -->
+        <div class="flex flex-col bg-white border border-slate-200 shadow-xs rounded-xl p-6 sm:p-10 hover:border-[#C8A961]/60 transition-all">
+          <div class="size-12 rounded-xl bg-[#0F1E36] text-[#C8A961] inline-flex items-center justify-center font-serif text-xl font-bold mb-6">
+            M
+          </div>
+          <h3 class="text-2xl font-bold text-[#0F1E36] font-serif mb-3">Misi Kami</h3>
+          <ul class="space-y-2.5 text-slate-600 text-sm leading-relaxed">
+            <li class="flex items-start gap-x-2.5">
+              <span class="text-[#C8A961] font-bold shrink-0">1.</span>
+              <span>Menyediakan advis hukum yang tajam, solutif, dan melindungi aset klien dari potensi sengketa di masa depan.</span>
+            </li>
+            <li class="flex items-start gap-x-2.5">
+              <span class="text-[#C8A961] font-bold shrink-0">2.</span>
+              <span>Memberikan pembelaan litigasi yang gigih, berkeadilan, dan menghormati hak asasi di seluruh tingkatan peradilan.</span>
+            </li>
+            <li class="flex items-start gap-x-2.5">
+              <span class="text-[#C8A961] font-bold shrink-0">3.</span>
+              <span>Membina kader advokat muda Indonesia agar berkarakter luhur, berintegritas tinggi, dan berwawasan internasional.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Penghargaan & Keanggotaan Organisasi -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <SectionTitle
+        badge="Pengakuan Resmi"
+        title="Akreditasi & Sertifikasi Profesi"
+        subtitle="Advokat kami terdaftar resmi dan memegang lisensi praktisi pada berbagai asosiasi profesi hukum berwibawa."
+        centered={true}
+      />
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8">
+        <div class="flex flex-col items-center justify-center p-5 rounded-xl border border-slate-200 bg-[#FAF8F5] text-center hover:border-[#C8A961] shadow-2xs transition-all">
+          <div class="text-2xl font-bold text-[#0F1E36] font-serif">PERADI</div>
+          <p class="text-xs text-slate-500 mt-1">Perhimpunan Advokat Indonesia</p>
+        </div>
+
+        <div class="flex flex-col items-center justify-center p-5 rounded-xl border border-slate-200 bg-[#FAF8F5] text-center hover:border-[#C8A961] shadow-2xs transition-all">
+          <div class="text-2xl font-bold text-[#0F1E36] font-serif">BANI</div>
+          <p class="text-xs text-slate-500 mt-1">Badan Arbitrase Nasional Indonesia</p>
+        </div>
+
+        <div class="flex flex-col items-center justify-center p-5 rounded-xl border border-slate-200 bg-[#FAF8F5] text-center hover:border-[#C8A961] shadow-2xs transition-all">
+          <div class="text-2xl font-bold text-[#0F1E36] font-serif">AKPI</div>
+          <p class="text-xs text-slate-500 mt-1">Kurator & Pengurus Indonesia</p>
+        </div>
+
+        <div class="flex flex-col items-center justify-center p-5 rounded-xl border border-slate-200 bg-[#FAF8F5] text-center hover:border-[#C8A961] shadow-2xs transition-all">
+          <div class="text-2xl font-bold text-[#0F1E36] font-serif">HKHPM</div>
+          <p class="text-xs text-slate-500 mt-1">Konsultan Hukum Pasar Modal</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>

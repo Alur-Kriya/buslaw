@@ -1,0 +1,85 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { articles } from '../../data/articles';
+import { lawyers } from '../../data/team';
+---
+
+<PageLayout
+  title="Artikel & Wawasan Hukum | BUSLAW & PARTNERS"
+  description="Kumpulan analisis hukum terkini, panduan regulasi bisnis, dan opini hukum dari para partner dan advokat Buslaw & Partners."
+  headerTitle="Wawasan & Publikasi Hukum"
+  headerSubtitle="Analisis mendalam mengenai perkembangan regulasi perundang-undangan dan strategi hukum komersial di Indonesia."
+  breadcrumbs={[{ label: 'Artikel' }]}
+>
+  <section class="py-20 bg-[#FAF8F5]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {articles.map((article) => {
+          const author = lawyers.find((l) => l.id === article.authorId);
+          return (
+            <article class="flex flex-col bg-white border border-slate-200 shadow-xs rounded-xl overflow-hidden hover:border-[#C8A961]/70 hover:shadow-md transition-all duration-200 group justify-between">
+              <div>
+                <!-- Article Image -->
+                <div class="relative h-52 overflow-hidden bg-slate-900">
+                  <img
+                    src={article.image}
+                    alt={article.title}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div class="absolute top-4 left-4">
+                    <span class="inline-flex items-center gap-x-1.5 py-1 px-3 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-[#0F1E36] text-[#C8A961] shadow-xs">
+                      {article.category}
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Text Content -->
+                <div class="p-6">
+                  <div class="flex items-center gap-x-2 text-xs text-slate-400 mb-2.5">
+                    <span>{article.publishDate}</span>
+                    <span>•</span>
+                    <span>{article.readTime}</span>
+                  </div>
+
+                  <h2 class="text-xl font-bold text-[#0F1E36] group-hover:text-[#C8A961] transition-colors font-serif leading-snug mb-3">
+                    <a href={`/artikel/${article.slug}`}>
+                      {article.title}
+                    </a>
+                  </h2>
+
+                  <p class="text-xs text-slate-600 leading-relaxed line-clamp-3">
+                    {article.excerpt}
+                  </p>
+                </div>
+              </div>
+
+              <!-- Author Footer (Preline Card Footer) -->
+              <div class="p-6 pt-0 border-t border-slate-100 flex items-center justify-between mt-4">
+                {author && (
+                  <div class="flex items-center gap-x-2.5">
+                    <img
+                      src={author.image}
+                      alt={author.name}
+                      class="size-8 rounded-full object-cover border border-[#C8A961]"
+                    />
+                    <div>
+                      <p class="text-xs font-bold text-[#0F1E36]">{author.name.split(',')[0]}</p>
+                      <p class="text-[10px] text-slate-400">{author.title}</p>
+                    </div>
+                  </div>
+                )}
+                <a
+                  href={`/artikel/${article.slug}`}
+                  class="inline-flex items-center gap-x-1 text-xs font-bold text-[#C8A961] group-hover:text-[#0F1E36] transition-colors"
+                >
+                  <span>Baca</span>
+                  <span class="transform group-hover:translate-x-0.5 transition-transform">→</span>
+                </a>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+</PageLayout>

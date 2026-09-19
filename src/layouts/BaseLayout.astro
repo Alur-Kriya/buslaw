@@ -1,0 +1,108 @@
+---
+import '../styles/global.css';
+import { firmContact } from '../data/navigation';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+}
+
+const {
+  title = `${firmContact.name} | ${firmContact.tagline}`,
+  description = 'Firma hukum terkemuka di Jakarta yang menyediakan layanan advokasi hukum korporasi, litigasi komersial, pertanahan, ketenagakerjaan, kepailitan, dan hukum keluarga oleh 6 pengacara berpengalaman.',
+  image = 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200',
+  canonical = Astro.url.href,
+} = Astro.props;
+
+const siteUrl = 'https://buslaw.id';
+---
+
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonical} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={image} />
+
+    <!-- Structured Data (Schema.org / LegalService) -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "LegalService",
+      "name": firmContact.name,
+      "description": description,
+      "url": siteUrl,
+      "telephone": firmContact.phone,
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Equity Tower Lt. 28, SCBD, Jl. Jend. Sudirman Kav. 52-53",
+        "addressLocality": "Jakarta Selatan",
+        "postalCode": "12190",
+        "addressCountry": "ID"
+      },
+      "priceRange": "$$$$",
+      "openingHours": "Mo-Fr 08:30-18:00"
+    })} />
+  </head>
+  <body class="min-h-screen flex flex-col bg-[#FAF8F5] text-slate-800 antialiased selection:bg-[#C8A961] selection:text-[#0F1E36]">
+    <slot />
+
+    <!-- Minimalist Scroll Animation Observer Script -->
+    <script>
+      const setupScrollAnimations = () => {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('opacity-100', 'translate-y-0');
+                entry.target.classList.remove('opacity-0', 'translate-y-6');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+        );
+
+        document.querySelectorAll('[data-animate]').forEach((el) => {
+          el.classList.add('transition-all', 'duration-700', 'ease-out', 'opacity-0', 'translate-y-6');
+          observer.observe(el);
+        });
+      };
+
+      document.addEventListener('DOMContentLoaded', setupScrollAnimations);
+      document.addEventListener('DOMContentLoaded', () => {
+        setupScrollAnimations();
+      });
+    </script>
+    <script>
+      import "preline";
+    </script>
+  </body>
+</html>
+

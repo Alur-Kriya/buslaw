@@ -1,0 +1,214 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import Button from '../../components/common/Button.astro';
+import { practiceAreas, type PracticeArea } from '../../data/services';
+import { lawyers } from '../../data/team';
+
+export function getStaticPaths() {
+  return practiceAreas.map((area) => ({
+    params: { slug: area.slug },
+    props: { area },
+  }));
+}
+
+interface Props {
+  area: PracticeArea;
+}
+
+const { area } = Astro.props;
+const leadLawyer = lawyers.find((l) => l.id === area.leadLawyerId);
+---
+
+<PageLayout
+  title={`${area.title} | BUSLAW & PARTNERS`}
+  description={area.shortDesc}
+  headerTitle={area.title}
+  headerSubtitle={area.shortDesc}
+  breadcrumbs={[
+    { label: 'Layanan', href: '/layanan' },
+    { label: area.title }
+  ]}
+>
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
+        <!-- Main Content (8 cols) -->
+        <div class="lg:col-span-8 space-y-12">
+          <!-- Overview -->
+          <div class="space-y-4">
+            <span class="inline-flex items-center gap-x-1.5 py-1 px-3 rounded-full text-xs font-medium bg-[#C8A961]/15 text-[#B19047] border border-[#C8A961]/30">
+              {area.titleEn}
+            </span>
+            <h2 class="text-2xl sm:text-3xl font-bold text-[#0F1E36] font-serif">
+              Ikhtisar Layanan
+            </h2>
+            <p class="text-slate-600 leading-relaxed text-base">
+              {area.fullDesc}
+            </p>
+          </div>
+
+          <!-- Cakupan Layanan (Preline Cards Grid) -->
+          <div class="space-y-6">
+            <h2 class="text-2xl font-bold text-[#0F1E36] font-serif">
+              Cakupan Penanganan Kami
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              {area.servicesList.map((item) => (
+                <div class="p-4 rounded-xl bg-[#FAF8F5] border border-slate-200 flex items-start gap-x-3">
+                  <div class="size-6 rounded-full bg-[#C8A961]/20 text-[#B19047] flex items-center justify-center shrink-0 mt-0.5">
+                    <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                  </div>
+                  <span class="text-sm font-medium text-slate-800">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Alur Kerja 4 Langkah (Preline Stepper/Cards) -->
+          <div class="space-y-6">
+            <h2 class="text-2xl font-bold text-[#0F1E36] font-serif">
+              Alur Kerja & Penanganan Perkara
+            </h2>
+            <div class="space-y-3">
+              {area.workflow.map((wf) => (
+                <div class="flex items-start gap-x-4 p-5 rounded-xl border border-slate-200 bg-white hover:border-[#C8A961]/60 transition-colors shadow-2xs">
+                  <span class="text-2xl font-extrabold text-[#C8A961] font-serif shrink-0 w-8">
+                    {wf.step}
+                  </span>
+                  <div>
+                    <h3 class="text-base font-bold text-[#0F1E36] mb-1 font-sans">
+                      {wf.title}
+                    </h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                      {wf.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Preline UI Interactive Accordion FAQ -->
+          <div class="space-y-6">
+            <h2 class="text-2xl font-bold text-[#0F1E36] font-serif">
+              Pertanyaan yang Sering Diajukan (FAQ)
+            </h2>
+
+            <div class="hs-accordion-group space-y-3">
+              {area.faqs.map((faq, idx) => (
+                <div class={`hs-accordion bg-white border border-slate-200 rounded-xl overflow-hidden shadow-2xs ${idx === 0 ? 'active' : ''}`} id={`hs-faq-${idx}`}>
+                  <button
+                    class="hs-accordion-toggle hs-accordion-active:text-[#C8A961] py-4 px-5 inline-flex items-center justify-between gap-x-3 w-full font-semibold text-start text-sm text-[#0F1E36] hover:text-[#C8A961] focus:outline-hidden transition-colors cursor-pointer"
+                    aria-expanded={idx === 0 ? "true" : "false"}
+                    aria-controls={`hs-faq-collapse-${idx}`}
+                  >
+                    <span class="flex items-center gap-x-3">
+                      <span class="text-[#C8A961] font-serif font-bold text-base">Q.</span>
+                      <span>{faq.question}</span>
+                    </span>
+                    <svg class="hs-accordion-active:hidden block size-4 text-slate-400 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                    <svg class="hs-accordion-active:block hidden size-4 text-[#C8A961] shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+                  </button>
+                  <div
+                    id={`hs-faq-collapse-${idx}`}
+                    class={`hs-accordion-content w-full overflow-hidden transition-[height] duration-300 ${idx === 0 ? '' : 'hidden'}`}
+                    role="region"
+                    aria-labelledby={`hs-faq-${idx}`}
+                  >
+                    <div class="pb-4 px-5 text-sm text-slate-600 pl-10 leading-relaxed border-t border-slate-100 pt-3">
+                      {faq.answer}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Sidebar (4 cols) -->
+        <div class="lg:col-span-4 space-y-6">
+          <!-- Lead Lawyer Card -->
+          {leadLawyer && (
+            <div class="bg-[#0F1E36] text-white rounded-2xl p-6 shadow-md border border-[#C8A961]/30">
+              <span class="inline-flex items-center gap-x-1.5 py-0.5 px-2.5 rounded-md text-[11px] font-semibold tracking-wider uppercase bg-[#C8A961]/20 text-[#D8BD7E] mb-4">
+                Advokat Penanggung Jawab
+              </span>
+
+              <div class="flex items-center gap-x-4 mb-4">
+                <img
+                  src={leadLawyer.image}
+                  alt={leadLawyer.name}
+                  class="size-16 rounded-full object-cover border-2 border-[#C8A961]"
+                />
+                <div>
+                  <h4 class="text-base font-bold text-white font-serif">
+                    {leadLawyer.name}
+                  </h4>
+                  <p class="text-xs text-[#C8A961] font-semibold">
+                    {leadLawyer.title}
+                  </p>
+                </div>
+              </div>
+
+              <blockquote class="text-xs text-slate-300 italic mb-6 leading-relaxed">
+                "{leadLawyer.quote}"
+              </blockquote>
+
+              <div class="space-y-2 border-t border-slate-700/80 pt-4 text-xs text-slate-300">
+                <p><strong>Pengalaman:</strong> {leadLawyer.experienceYears}+ Tahun</p>
+                <p><strong>Perkara Selesai:</strong> {leadLawyer.casesHandled}+ Kasus</p>
+                <p><strong>Email:</strong> {leadLawyer.email}</p>
+              </div>
+
+              <div class="mt-6 pt-2">
+                <a
+                  href={`/tim/${leadLawyer.id}`}
+                  class="w-full py-2.5 px-4 inline-flex justify-center items-center gap-x-2 text-xs font-semibold uppercase tracking-wider rounded-lg bg-[#C8A961] text-[#0F1E36] hover:bg-[#D8BD7E] transition-colors"
+                >
+                  Lihat Profil Advokat
+                </a>
+              </div>
+            </div>
+          )}
+
+          <!-- Quick Consultation Card -->
+          <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs space-y-4">
+            <h3 class="text-lg font-bold text-[#0F1E36] font-serif">
+              Butuh Konsultasi Segera?
+            </h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Diskusikan duduk perkara Anda bersama tim advokat kami dengan jaminan kerahasiaan penuh.
+            </p>
+            <Button href="/kontak" variant="secondary" size="md" class="w-full">
+              <span>Ajukan Jadwal Konsultasi</span>
+            </Button>
+          </div>
+
+          <!-- Other Practice Areas Links -->
+          <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs">
+            <h4 class="text-xs font-bold text-[#0F1E36] uppercase tracking-wider mb-4 font-sans">
+              Bidang Praktik Lainnya
+            </h4>
+            <ul class="space-y-2 text-xs">
+              {practiceAreas
+                .filter((p) => p.slug !== area.slug)
+                .map((other) => (
+                  <li>
+                    <a
+                      href={`/layanan/${other.slug}`}
+                      class="text-slate-600 hover:text-[#C8A961] flex items-center justify-between group transition-colors py-1"
+                    >
+                      <span>{other.title}</span>
+                      <span class="text-[#C8A961] group-hover:translate-x-0.5 transition-transform">→</span>
+                    </a>
+                  </li>
+                ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>
