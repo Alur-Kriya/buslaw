@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://buslaw.id/sitemap-index.xml
