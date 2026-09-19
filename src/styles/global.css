@@ -1,8 +1,6 @@
 @import "tailwindcss";
 
 @source "../../node_modules/preline/dist/*.js";
-@plugin "preline/plugin";
-@plugin "@tailwindcss/forms";
 
 @theme {
   --color-navy-950: #0A1220;
